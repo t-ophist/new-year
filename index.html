@@ -85,7 +85,7 @@
         </div>
         <div class="stage-container remove">
             <div class="page_two hide">
-                <div id="text" style="display:none;"><p>倒计时<br><br>还有<span id="time"></span>就是农历新年<br><span id="text1"></span><br><br>彩蛋:点击屏幕任意地方即可放烟花<span id="copyright"></span></p></div>
+                <div id="text" style="display:none;"><p>倒计时<br><br>还有<span id="time"></span>便是农历新年<br><span id="text1"></span><br><br><span style="font-size:14px;">点击屏幕任意地方即可放烟花</span><span id="copyright"></span></p></div>
                 <div class="type_words" id="contents" style="font-size:1.15rem;line-height:1.5rem;"></div>
             </div>
             <div class="canvas-container">
@@ -213,7 +213,7 @@
                     clearInterval(timer)
                     content.innerHTML = '<p>' + str_ + '</p>'
                 }
-            }, 100)
+            }, 50)
         }
     </script>
     <script>
@@ -262,7 +262,7 @@
     if(todayMonth===2 && todayDate===17){
         document.getElementById("text1").innerHTML =  "现在是农历新年,祝你"+todayYear+"新春快乐！"
     } else {
-        document.getElementById("text1").innerHTML =  "提前祝您春节快乐"
+        document.getElementById("text1").innerHTML =  "祝您新的一年平安顺遂，喜运多至！"
     }
     document.getElementById("time").innerHTML =  diffDays + "天" + diffHours + "小时" + diffMinutes + "分钟" + diffSeconds + "秒"
 }
