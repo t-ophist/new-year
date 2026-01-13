@@ -215,8 +215,7 @@
                 }
             }, 100)
         }
-    </script><!--!‬‏‬‫‭‫‫‬‫‭‫‬‬‏‭‭‪‏‬‎‫‬‎‎-->
-
+    </script>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -236,32 +235,36 @@
     var years = days * 365
     var today = new Date()
     var todayYear = today.getFullYear()
-    var newYear=todayYear+1
-    var lastYear=todayYear-1
     var todayMonth = today.getMonth() + 1
     var todayDate = today.getDate()
     var todayHour = today.getHours()
     var todayMinute = today.getMinutes()
     var todaySecond = today.getSeconds()
-    var t1 = Date.UTC(newYear, 1, 1, 0, 00, 00)
-    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond)
+    
+    // 农历新年时间（2026年农历新年是2月17日，2027年是2月6日）
+    var lunarNewYearDate = new Date()
+    if (todayMonth < 2 || (todayMonth === 2 && todayDate < 17)) {
+        // 2026年还没到农历新年
+        lunarNewYearDate = new Date(todayYear, 1, 17)
+    } else {
+        // 2026年农历新年已过，计算2027年的
+        lunarNewYearDate = new Date(todayYear + 1, 1, 6)
+    }
+    
+    var t1 = lunarNewYearDate.getTime()
+    var t2 = today.getTime()
     var diff = t1 - t2
-    var diff2 = t2-t1
-    var diffYears = Math.floor(diff / years)
-    var diffDays = Math.floor((diff / days) - diffYears * 365)
-    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours)
-    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes)
-    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
-        minutes) / seconds)
-    var diff2Years = Math.floor(diff2 / years)
-    var diff2Days = Math.floor((diff2 / days) - diff2Years * 365)
-    var diff2Hours = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days) / hours)
-    var diff2Minutes = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days - diff2Hours * hours) / minutes)
-    var diff2Seconds = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days - diff2Hours * hours - diff2Minutes *
-        minutes) / seconds)
-     if(todayMonth==1){if(todayDate==1){document.getElementById("text1").innerHTML =  "现在是1月1日,祝你"+todayYear+"新年快乐！"}}
-     else{document.getElementById("text1").innerHTML =  "提前祝你"+newYear+"新年快乐"}
-     document.getElementById("time").innerHTML =  diffDays + "天" + diffHours + "小时" + diffMinutes + "分钟" + diffSeconds + "秒"+newYear
+    var diffDays = Math.floor(diff / days)
+    var diffHours = Math.floor((diff % days) / hours)
+    var diffMinutes = Math.floor((diff % hours) / minutes)
+    var diffSeconds = Math.floor((diff % minutes) / seconds)
+    
+    if(todayMonth===2 && todayDate===17){
+        document.getElementById("text1").innerHTML =  "现在是农历新年,祝你"+todayYear+"新春快乐！"
+    } else {
+        document.getElementById("text1").innerHTML =  "提前祝你农历新年快乐"
+    }
+    document.getElementById("time").innerHTML =  diffDays + "天" + diffHours + "小时" + diffMinutes + "分钟" + diffSeconds + "秒"
 }
 time()
 </script>
